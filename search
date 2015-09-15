@@ -1,0 +1,79 @@
+<?php
+	if(isset($_POST['submit'])){
+		if(isset($_GET['go'])){
+			if((!empty($_POST['name'])) or (!empty($_POST['add'])) or (!empty($_POST['city'])) or (!empty($_POST['state']))){ 
+			
+				$name=$_POST['name']; 
+				$add=$_POST['add'];
+				$city=$_POST['city'];
+				$state=$_POST['state'];
+				//connect  to the database
+				$conn= new mysqli("localhost", "root",  "Philly_93", "prototype" ) or die ('I cannot connect to the database  because: ' . mysql_error());
+				//-query  the database table
+				// Check connection
+				/*
+				if ($conn->connect_error) {
+					 die("Connection failed: " . $conn->connect_error);
+				} 
+				else{
+					echo "connected successfully!";
+				}
+				*/
+				$sql="SELECT  Owner_name, Own_addr, Own_city, Own_state, Hldr_name, Prop_bal FROM prototype WHERE Owner_name LIKE '%" . $name .  "%' AND Own_addr LIKE '%" . $add ."%' AND Own_city LIKE '%" . $city ."%' AND Own_state LIKE '%" . $state ."%'";
+				//-run  the query against the mysql query function
+				$result = $conn->query($sql);
+				if ($result->num_rows > 0) {
+					echo "<img src='http://www.missingassetservices.com/wp-content/uploads/2014/08/missing-assets-company-logo.png' style='display: block;margin-left: auto;margin-right: auto;'>";
+					 // output data of each row
+					 echo "<br>";
+					 echo "<br><p align='center'> <font face='Arial, Helvetica, sans-serif' size='6'><strong>".$result->num_rows." Results for Keyword(s): ".$name." ".$add." ".$city." ".$state."</strong></font></p><br>";
+					 echo "<table align='center' border='1' cellspacing='2' cellpadding='2'>
+							<tr>
+							<td>
+							<font face='Arial, Helvetica, sans-serif'><strong>Company name</strong></font>
+							</td>
+							<td>
+							<font face='Arial, Helvetica, sans-serif'><strong>Address</strong></font>
+							</td>
+							<td>
+							<font face='Arial, Helvetica, sans-serif'><strong>City</strong></font>
+							</td>
+							<td>
+							<font face='Arial, Helvetica, sans-serif'><strong>State</strong></font>
+							</td>
+							<td>
+							<font face='Arial, Helvetica, sans-serif'><strong>Holder Name</strong></font>
+							</td>
+							<td>
+							<font face='Arial, Helvetica, sans-serif'><strong>Amount</strong></font>
+							</td>
+							</tr>";
+					 while($row = $result->fetch_assoc()) {
+						 $Name=$row['Owner_name'];
+						  $Addre=$row['Own_addr'];
+						  $City=$row['Own_city'];
+						  $State=$row['Own_state'];
+						  $Hldr=$row['Hldr_name'];
+						  $Amount=$row['Prop_bal'];
+						  echo "<tr><td>".$row['Owner_name']."</td><td>".$row['Own_addr']."</td><td>".$row['Own_city']."</td><td>".$row['Own_state']."</td><td>".$row['Hldr_name']."</td><td>$".$row['Prop_bal']."</td></tr>";
+					 }
+					 echo "</table>";
+				} else {
+					echo "<img src='http://www.missingassetservices.com/wp-content/uploads/2014/08/missing-assets-company-logo.png' style='display: block;margin-left: auto;margin-right: auto;'>";
+					 // output data of each row
+					 echo "<br>";
+					 echo "<br><p align='center'> <font face='Arial, Helvetica, sans-serif' size='6'><strong>".$result->num_rows." Results for Keyword(s): ".$name." ".$add." ".$city." ".$state."</strong></font></p><br>";
+
+				}
+				 echo "<p align='center'><input  type='button' name='Return to search' value='Return' onclick='history.go(-1)' align='center'></p>";
+
+				$conn->close();
+			}
+			else{
+				echo "<img src='http://www.missingassetservices.com/wp-content/uploads/2014/08/missing-assets-company-logo.png' style='display: block;margin-left: auto;margin-right: auto;'>";
+				echo  "<p align='center'> <font face='Arial, Helvetica, sans-serif' size='6'><strong>Please enter a search query</strong></font></p>";
+				echo "<p align='center'><input  type='button' name='Return to search' value='Return' onclick='history.go(-1)' align='center'></p>";
+			}
+		}
+	}
+?>
