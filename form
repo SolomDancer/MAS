@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html> 
+	<head> 
+	<meta  http-equiv="Content-Type" content="text/html;  charset=iso-8859-1"> 
+	<title>Search  Contacts</title> 
+	<style  type="text/css" media="screen">
+		IMG.displayed {
+    display: block;
+    margin-left: auto;
+    margin-right: auto }
+	
+	form.blocktext {
+    margin-left: auto;
+    margin-right: auto;
+    width: 15em
+}
+
+P.blocktext{
+    margin-left: auto;
+    margin-right: auto;
+    width: 15em
+}
+
+h3.blocktext{
+    margin-left: auto;
+    margin-right: auto;
+	width: 13em
+}
+	</style>
+	</head> 
+		<p><body>
+		<img class="displayed" src="http://www.missingassetservices.com/wp-content/uploads/2014/08/missing-assets-company-logo.png">
+		<h3 class="blocktext">Search  Contacts Details</h3> 
+		<p class="blocktext">You  may search either by Comany Name or Address</p> 
+		<form  class="blocktext" method="post" action="search.php?go"  id="searchform"> 
+			<table>
+				<tr>
+					<td>
+						<p>Comany Name:</p>
+						<input  type="text" name="name">
+						<p>Address:</p>
+						<input  type="text" name="add">
+						<p>City:</p>
+						<input  type="text" name="city">
+						<p>State:</p>
+						<input  type="text" name="state"> 
+					</td>
+				</tr>
+			</table> 
+			<input  type="submit" name="submit" value="Search"> 
+		</form>
+	</body> 
+</html> 
+</p> 
